@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="Askhsh2.css">
+</head>
+<body>
+<div class="container">
+	<div class="left">
+
+		<div class="avatar">
+			<img src="img/profile_pic0.jpg" id="profile_pic"/>
+		</div>
+	</div>
+	<div class="right">
+		<div class="info">
+			<div class="user-info">
+				<span class="label">UserName : </span><span class="value">redangel1993</span>
+			</div>
+			<div class="user-info">
+				<span class="label">FullName : </span><span class="value">Marios Kamperis</span>
+			</div>
+			<div class="user-info">
+				<span class="label">Address : </span><span class="value">Solomou31</span>
+			</div>
+			<div class="user-info">
+				<span class="label">email : </span><span class="value">Kamperis1993@hotmail.com</span>
+			</div>
+		</div>
+
+		<div class="actions">
+			<span class="user-actions"><button onclick="toggle_background()">Toggle Background</button></span>
+			<span class="user-actions"><button onclick="change_font_color()">Change Font Color</button></span>
+			<span class="user-actions" id="color_palette" style="visibility: hidden;">
+				<table>
+					<tr>
+						<th>
+							<button class="color_button" id="red" style="background-color: red;" onclick="changeColorTo(this.id)">Red
+							</button>
+						</th>
+						<th>
+							<button class="color_button" id="blue" style="background-color: blue;" onclick="changeColorTo(this.id)">Blue
+							</button>
+						</th>
+						<th>
+							<button class="color_button" id="magenta" style="background-color: magenta;" onclick="changeColorTo(this.id)">
+								Magenta
+							</button>
+						</th>
+						<th>
+							<button class="color_button" id="green" style="background-color: green;" onclick="changeColorTo(this.id)">
+								Green
+							</button>
+						</th>
+						<th>
+							<button class="color_button" id="black" style="background-color: black; color:white"
+									onclick="changeColorTo(this.id)">Black
+							</button>
+						</th>
+						<th>
+							<button class="color_button" id="orange" style="background-color: orange;" onclick="changeColorTo(this.id)">
+								Orange
+							</button>
+						</th>
+					</tr>
+				</table>
+			</span>
+
+			<span class="user-actions"><button onclick="toggle_avatar()">Toggle Avatar Frame</button></span>
+			<span class="user-actions"><button onclick="change_avatar()">Change Avatar Picture</button></span>
+			<span class="user-actions">
+				<input type="file" id="myFile" multiple size="50" onchange="add_picture()">
+			</span>
+
+		</div>
+	</div>
+</div>
+
+</body>
+<script type="text/javascript">
+
+	//Global variables
+	var toggle_background_flag = true;
+	var toggle_color_pallete = true;
+	var toggle_avatar_flag = true;
+	var profile_pic_array = [
+		"img/profile_pic0.jpg",
+		"img/profile_pic1.jpg",
+		"img/profile_pic2.jpg",
+		"img/profile_pic3.jpg",
+		"img/profile_pic4.jpg",
+		"img/profile_pic5.jpg"
+	];
+
+	function toggle_background()
+	{
+		if (toggle_background_flag == true) {
+			document.body.style.backgroundColor = "red";
+			toggle_background_flag = false;
+		} else {
+			document.body.style.backgroundColor = "beige";
+			toggle_background_flag = true;
+		}
+	}
+	function change_font_color()
+	{
+		if (toggle_color_pallete == false) {
+			document.getElementById("color_palette").style.visibility = "hidden";
+			toggle_color_pallete = true;
+		} else {
+			document.getElementById("color_palette").style.visibility = "visible";
+			toggle_color_pallete = false;
+		}
+	}
+	function changeColorTo(id)
+	{
+
+
+		var elements = document.getElementsByClassName("value");
+		console.log(elements);
+		for (var i = 0; i < elements.length; i++) {
+			elements[i].style.color = id;
+		}
+	}
+	function toggle_avatar()
+	{
+
+		if (toggle_avatar_flag == true) {
+			document.getElementById("profile_pic").style.borderRadius = "100%";
+			toggle_avatar_flag = false;
+		} else {
+			document.getElementById("profile_pic").style.borderRadius = "0%";
+			toggle_avatar_flag = true;
+		}
+	}
+	function change_avatar(path)
+	{
+		if (path == null) {
+			var rand = profile_pic_array[Math.floor(Math.random() * profile_pic_array.length)];
+			document.getElementById("profile_pic").src = rand;
+		} else {
+//			alert("add pisctures")
+		}
+
+
+	}
+	function add_picture()
+	{
+		var preview = document.querySelector('img'); //selects the query named img
+		var file = document.querySelector('input[type=file]').files[0]; //sames as here
+		var reader = new FileReader();
+
+		reader.onloadend = function ()
+		{
+			preview.src = reader.result;
+		}
+
+		if (file) {
+			reader.readAsDataURL(file); //reads the data as a URL
+			profile_pic_array.push("img/"+file.name);
+			console.log(file.name);
+			console.log(profile_pic_array.toString());
+		} else {
+			preview.src = "";
+		}
+	}
+</script>
+</html>
