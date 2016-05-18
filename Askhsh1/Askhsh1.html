@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+	<link rel="stylesheet" type="text/css" href="Askhsh1.css">
+</head>
+<body>
+
+<!--<form class="form-control" onsubmit="submitConversion();" id="converterForm" onkeypress="detectEnterKey(submitConversion())">-->
+<form class="form-control" id="converterForm" onkeypress="">
+	<div class="form">
+		Enter Amount: <input type="text" name="ammount" id="ammount">
+	</div>
+	<div class="form">
+		<select id="currencySelector1">
+			<option value="EUR">Euro</option>
+			<option value="USD">US Dollar</option>
+			<option value="GBP">British Pound</option>
+			<option value="AUD">Australian Dollar</option>
+			<option value="JPY"> Japanese Yen</option>
+		</select><br>
+	</div>
+	<div class="form">
+		<button type="button" onclick="swap()"> <-></button>
+	</div>
+	<div class="form">
+		<select id="currencySelector2">
+			<option value="EUR">Euro</option>
+			<option value="USD">US Dollar</option>
+			<option value="GBP">British Pound</option>
+			<option value="AUD">Australian Dollar</option>
+			<option value="JPY"> Japanese Yen</option>
+		</select><br>
+	</div>
+	<div class="form">
+		<button type="button" onclick="submitConversion()">Convert</button>
+	</div>
+	<div>
+		<span class="result" id="result"></span>
+	</div>
+
+
+</form>
+
+</body>
+<script type="text/javascript">
+	function swap()
+	{
+		var currencySelector1 = document.getElementById('currencySelector1').selectedIndex;
+		var currencySelector2 = document.getElementById('currencySelector2').selectedIndex;
+
+		document.getElementById("currencySelector1").selectedIndex = currencySelector2;
+		document.getElementById("currencySelector2").selectedIndex = currencySelector1;
+	}
+	function submitConversion()
+	{
+		var currencyArray = [
+			//Euro Converter
+			["EUR-USD", "1.13"],
+			["EUR-GBP", "0.78"],
+			["EUR-AUD", "1.55"],
+			["EUR-JPY", "123.29"],
+			//US Dollar converter
+			["USD-EUR", "0.89"],
+			["USD-GBP", "0.69"],
+			["USD-AUD", "1.37"],
+			["USD-JPY", "109.39"],
+			//British Pound coverter
+			["GBP-EUR", "1,28"],
+			["GBP-USD", "1,44"],
+			["GBP-AUD", "1.98"],
+			["GBP-JPY", "157.62"],
+			//Australian Dollar coverter
+			["AUD-EUR", "0,65"],
+			["AUD-USD", "0,73"],
+			["AUD-GBP", "0,51"],
+			["AUD-JPY", "79,69"]
+		];
+		var ammount = document.getElementById('ammount').value;
+		var currencySelector1 = document.getElementById('currencySelector1').value;
+		var currencySelector2 = document.getElementById('currencySelector2').value;
+		var message = "";
+		console.log(ammount);
+
+		if (currencySelector1 == currencySelector2) {
+			message = "1 " + currencySelector1 + " equals " + " 1" + currencySelector2;
+		} else {
+			var key = currencySelector1 + '-' + currencySelector2;
+			var message = "";
+			for (var i = 0; i < currencyArray.length; i++) {
+				if (key == currencyArray[i][0]) {
+					console.log("Key :" + key);
+					var result = Math.round( ammount * currencyArray[i][1]*1000)/1000;
+					message = ammount + " " + currencySelector1 + " equals " +result+ " " + currencySelector2;
+				}
+			}
+		}
+		document.getElementById("result").textContent = message;
+
+	}
+</script>
+</html>
