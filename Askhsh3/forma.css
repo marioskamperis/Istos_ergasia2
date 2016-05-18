@@ -1,0 +1,218 @@
+.body {
+	width: 500px;
+	max-height: 500px;
+	margin: 10px;
+	border: 1px solid #fff;
+	background-color: #ffffff;
+	box-shadow: 0px 2px 7px #292929;
+	-moz-box-shadow: 0px 2px 7px #292929;
+	-webkit-box-shadow: 0px 2px 7px #292929;
+	border-radius: 10px;
+	-moz-border-radius: 10px;
+	-webkit-border-radius: 10px;
+}
+
+.container,
+.header,
+.footer {
+	padding: 5px;
+}
+
+.container {
+	margin-top: 0;
+	min-height: 200px;
+	overflow: auto;
+	margin-bottom: 10px;
+}
+
+.header {
+	height: 40px;
+	background-color: #ffffff;
+	text-align: center;
+	color: lightblue;
+
+	margin-bottom: 10px;
+	height: 40px;
+	-webkit-border-top-left-radius: 5px;
+	-webkit-border-top-right-radius: 5px;
+	-moz-border-radius-topleft: 5px;
+	-moz-border-radius-topright: 5px;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.footer {
+	height: 20px;
+	background-color: whiteSmoke;
+	border-top: 1px solid #DDD;
+	-webkit-border-bottom-left-radius: 5px;
+	-webkit-border-bottom-right-radius: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	-moz-border-radius-bottomright: 5px;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+/* REQUIRED FIELD*/
+ /*style all input elements with a required attribute */
+input:required {
+	content: "*";
+	box-shadow: 2px 2px 15px rgba(200, 0, 0, 0.85);
+}
+/**
+ * style input elements that have a required
+ * attribute and a focus state
+ */
+input:required:focus {
+	border: 1px solid red;
+	outline: none;
+}
+/**
+ * style input elements that have a required
+ * attribute and a hover state
+ */
+input:required:hover {
+	opacity: 1;
+}
+
+/*END OF REQUIRED FIELDS*/
+
+/*INPUT FIELDS CSS*/
+input[type=email],input[type=text], input[type=password], input[type=number], textarea {
+	-webkit-transition: all 0.30s ease-in-out;
+	-moz-transition: all 0.30s ease-in-out;
+	-ms-transition: all 0.30s ease-in-out;
+	-o-transition: all 0.30s ease-in-out;
+	outline: none;
+	padding: 3px 0px 3px 3px;
+	margin: 5px 1px 3px 0px;
+	border: 1px solid #DDDDDD;
+}
+
+input[type=email]:focus,input[type=text]:focus, input[type=password]:focus, input[type=number]:focus, textarea:focus {
+	box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+	padding: 3px 0px 3px 3px;
+	margin: 5px 1px 3px 0px;
+	border: 1px solid rgba(81, 203, 238, 1);
+}
+button[type=submit] {
+	padding:5px 15px;
+	background:lightgreen;
+	font-size: 150%;
+	border:0 none;
+	cursor:pointer;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+/* END OF INPUT FIELDS CSS*/
+
+.form-group {
+	margin-bottom: 20px;
+	display: block;
+	min-height: 10px;
+}
+.creditcard input{
+	width:65px;
+}
+
+fieldset {
+	padding: 10px;
+	margin: 10px;
+}
+
+label {
+	margin-right: 2%;
+	width: 140px;
+	text-align: right;
+	float: left;
+}
+.asterisk{
+	float: none;
+	color: darkred;
+	font-size: 150%;
+}
+
+input {
+	border: 1px solid #000;
+	margin-top: 10px;
+}
+
+/*DISSAPEAR PLACEHOLDER ON CLICK*/
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; } /* Firefox 18- */
+input:focus::-moz-placeholder { color:transparent; } /* Firefox 19+ */
+input:focus:-ms-input-placeholder { color:transparent; } /* oldIE ;) */
+/*END DISSAPEAR PLACEHOLDER ON CLICK*/
+
+
+/* RADIO BUTTONS */
+input[type=checkbox]:not(old),
+input[type=radio   ]:not(old) {
+	width: 28px;
+	/*margin  : 0;*/
+	padding: 0;
+	opacity: 0;
+}
+
+input[type=checkbox]:not(old) + label,
+input[type=radio   ]:not(old) + label {
+	display: inline-block;
+	margin-left: -28px;
+	padding-left: 28px;
+	/*background   : url('checks.png') no-repeat 0 0;*/
+	line-height: 24px;
+}
+
+input[type=checkbox]:not(old) + label > span,
+input[type=radio   ]:not(old) + label > span {
+	display: inline-block;
+	width: 0.875em;
+	height: 0.875em;
+	margin: 0.25em 0.5em 0.25em 0.25em;
+	border: 0.0625em solid rgb(192, 192, 192);
+	border-radius: 0.25em;
+	background: rgb(224, 224, 224);
+	background-image: -moz-linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
+	background-image: -ms-linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
+	background-image: -o-linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
+	background-image: -webkit-linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
+	background-image: linear-gradient(rgb(240, 240, 240), rgb(224, 224, 224));
+	vertical-align: bottom;
+}
+
+input[type=checkbox]:not(old):checked + label > span,
+input[type=radio   ]:not(old):checked + label > span {
+	background-image: -moz-linear-gradient(rgb(224, 224, 224), rgb(240, 240, 240));
+	background-image: -ms-linear-gradient(rgb(224, 224, 224), rgb(240, 240, 240));
+	background-image: -o-linear-gradient(rgb(224, 224, 224), rgb(240, 240, 240));
+	background-image: -webkit-linear-gradient(rgb(224, 224, 224), rgb(240, 240, 240));
+	background-image: linear-gradient(rgb(224, 224, 224), rgb(240, 240, 240));
+}
+
+input[type=checkbox]:not(old):checked + label > span:before {
+	content: '✓';
+	display: block;
+	width: 1em;
+	color: rgb(153, 204, 102);
+	font-size: 0.875em;
+	line-height: 1em;
+	text-align: center;
+	text-shadow: 0 0 0.0714em rgb(115, 153, 77);
+	font-weight: bold;
+}
+
+input[type=radio]:not(old):checked + label > span > span {
+	display: block;
+	width: 0.5em;
+	height: 0.5em;
+	margin: 0.125em;
+	border: 0.0625em solid rgb(115, 153, 77);
+	border-radius: 0.125em;
+	background: rgb(153, 204, 102);
+	background-image: -moz-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+	background-image: -ms-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+	background-image: -o-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+	background-image: -webkit-linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+	background-image: linear-gradient(rgb(179, 217, 140), rgb(153, 204, 102));
+}
+
+/*END RADIO BUTTONS*/

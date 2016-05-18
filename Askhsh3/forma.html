@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title>Texnologies kai Programmatismos ston pagkosmioisto</title>
+	<link rel="stylesheet" href="forma.css"/>
+</head>
+
+
+<body>
+
+<div class="header">
+	<h1>Place your order</h1>
+</div>
+
+<div class="container">
+	<form id="order">
+		<fieldset>
+			<legend>Login</legend>
+
+			<div class="form-group">
+				<label for="username">Username</label>
+				<input id="username" name="username" type="text" required> <label class="asterisk"> *</label>
+			</div>
+
+			<div class="form-group">
+				<label>Password</label>
+				<input id="password" type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,}" required>
+				<label class="asterisk"> *</label>
+			</div>
+		</fieldset>
+
+		<fieldset>
+
+			<legend>Payment Method</legend>
+
+			<div class="form-group">
+
+				<label>Payment Methods</label>
+				<select id="payment_methods" onchange="payment_change()">
+					<option value>Select a payment method</option>
+					<option value="1">Payment on pick-up</option>
+					<option value="2">Bank trasnfer/deposit</option>
+					<option value="3"> Credit/Debit card</option>
+				</select>
+			</div>
+
+			<fieldset id ="payment_fieldset" style="visibility:hidden;">
+				<div class="form-group">
+					<label>Type of Card
+					</label>
+					<select id="type_of_card" >
+						<option value>Select card type</option>
+						<option value="1">Visa</option>
+						<option value="2">Mastercard</option>
+					</select>
+				</div>
+
+				<div class="form-group creditcard">
+					<label>Card Number</label>
+					<input id="cardnumber1" name="cardNumber1" type="text" pattern="[0-9]{4}" size="4" >
+					<input id="cardnumber2" name="cardNumber2" type="text" pattern="[0-9]{4}" >
+					<input id="cardnumber3" name="cardNumber3" type="text" pattern="[0-9]{4}" >
+					<input id="cardnumber4" name="cardNumber4" type="text" pattern="[0-9]{4}" >
+					<label class="asterisk"> *</label>
+				</div>
+
+				<div class="form-group">
+					<label>Expiration Date:</label>
+					<input placeholder="1" class="form-control" type="number" id="month" min="1" max="12">
+					<input placeholder="2016" class="form-control" type="number" id="year" min="2016" max="2030">
+				</div>
+			</fieldset>
+		</fieldset>
+
+
+		<fieldset>
+			<legend>Other Information</legend>
+			<fieldset>
+
+				<div class="form-group">
+					<label>Name</label>
+					<input id="name" type="text" required>
+					<label class="asterisk"> *</label>
+				</div>
+
+				<div class="form-group">
+					<label>Address</label>
+					<input id="address" type="text" required> <label class="asterisk"> *</label>
+
+				</div>
+				<div class="form-group">
+					<label>E-mail</label>
+					<input id="email" placeholder="user@example.sth" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+
+				</div>
+				<div>
+					<label>Telephone Number</label>
+					<input id=tel name=tel type="text" pattern="[0-9]{10}">
+				</div>
+
+				<div class="form-group">
+					<label>Comments</label>
+					<textarea id="comments" rows="4" cols="50"></textarea>
+				</div>
+
+
+				<legend>Card type</legend>
+
+				<div class="radio-group">
+					<div>
+						<input id="visa" type="radio" name="radio" value="1" checked="checked">
+						<label for="visa">VISA<span><span></span></span></label>
+					</div>
+					<div>
+						<input id="mastercard" type="radio" name="radio" value="2">
+						<label for="mastercard">MasterCard<span><span></span></span></label>
+					</div>
+					<div>
+						<input id="amex" type="radio" name="radio" value="3">
+						<label for="amex">AMEX<span><span></span></span></label>
+					</div>
+				</div>
+
+			</fieldset>
+		</fieldset>
+
+		<fieldset>
+
+			<legend>Coupon</legend>
+
+			<div class="form-group">
+				<label>Coupon code:</label>
+				<input id="coupon" type="text"/>
+			</div>
+
+
+		</fieldset>
+		<div class="form-group">
+			<input id="terms" type="checkbox" name="radio" value="1">
+			<label for="terms">I accept the terms and conditions<span><span></span></span></label>
+		</div>
+		<div class="form-group">
+			<button type=submit>Place Order</button>
+			<button type=submit onclick="reset()" style="background:lightcoral;">Reset</button>
+		</div>
+
+		</fieldset>
+	</form>
+</div>
+
+<div class="footer">
+	<p>Created by: Kamperis Marios 3110068</p>
+	<p>Contact information: <a href="mailto:marioskamperis@gmail.com">
+		marioskamperis@gmail.com</a>.</p>
+</div>
+
+</body>
+<script type="text/javascript">
+
+	function payment_change(){
+		if(	document.getElementById("payment_methods").selectedIndex==3){
+			document.getElementById("payment_fieldset").style.visibility = "visible";
+			//An Invalid form control with name cardNumber error fix
+			document.getElementById("cardnumber1").required = true; //the empty string
+			document.getElementById("cardnumber2").required = true; //the empty string
+			document.getElementById("cardnumber3").required = true; //the empty string
+			document.getElementById("cardnumber4").required = true; //the empty string
+		}else{
+			document.getElementById("payment_fieldset").style.visibility = "hidden";
+			document.getElementById("cardnumber1").required = false; //the empty string
+			document.getElementById("cardnumber2").required = false; //the empty string
+			document.getElementById("cardnumber3").required = false; //the empty string
+			document.getElementById("cardnumber4").required = false; //the empty string
+		}
+	}
+	function reset(){
+		document.getElementById("order").reset();
+	}
+
+</script>
+</html>
