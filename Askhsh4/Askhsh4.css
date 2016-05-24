@@ -1,0 +1,54 @@
+body {
+	position: fixed;
+	top: 40%;
+	left: 50%;
+	width: 30em;
+
+	margin-top: -9em; /*set to a negative number 1/2 of your height*/
+	margin-left: -15em; /*set to a negative number 1/2 of your width*/
+	/*border: 1px solid #ccc;*/
+	background-color: #f3f3f3;
+	text-align: center;
+	float: left;
+	font-family: "Arial Rounded MT Bold";
+	font-size: x-large;
+	background-color: beige;
+	overflow: hidden;
+}
+div {
+	/*border: 1px solid black;*/
+	margin: 5px;
+}
+#parent {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100%;
+	/*width: 100%;*/
+	overflow: hidden;
+}
+.items{
+	max-height: 200px;
+	overflow: scroll;
+}
+.basket{
+
+	height:200px;
+	max-height: 200px;
+	background-color: #ffffff;
+}
+.object {
+	width:150px;
+	height:150px;
+	border-radius: 0%;
+}
+.left {
+	float: left;
+	width:50%;
+	display: block;
+}
+.hintlabel{
+	font-family: "Arial Rounded MT Bold";
+	font-size: medium;
+	color: grey;
+}
