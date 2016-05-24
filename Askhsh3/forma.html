@@ -2,8 +2,13 @@
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1.0">
+
 	<title>Texnologies kai Programmatismos ston pagkosmioisto</title>
 	<link rel="stylesheet" href="forma.css"/>
+
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj3fl2U6xlPTV0GVRMoqzQuNm9koTNFac&callback=initMap"
+			async defer></script>
 </head>
 
 
@@ -14,13 +19,14 @@
 </div>
 
 <div class="container">
-	<form id="order">
+	<form id="order" onsubmit="validateForm()">
 		<fieldset>
 			<legend>Login</legend>
 
 			<div class="form-group">
 				<label for="username">Username</label>
-				<input id="username" name="username" type="text" required> <label class="asterisk"> *</label>
+				<input id="username" name="username" type="text" onkeyup="showHint(this.value)" required> <label class="asterisk"> *</label>
+				<p>Suggestions: <span id="txtHint"></span></p>
 			</div>
 
 			<div class="form-group">
@@ -45,11 +51,11 @@
 				</select>
 			</div>
 
-			<fieldset id ="payment_fieldset" style="visibility:hidden;">
+			<fieldset id="payment_fieldset" style="visibility:hidden;">
 				<div class="form-group">
 					<label>Type of Card
 					</label>
-					<select id="type_of_card" >
+					<select id="type_of_card">
 						<option value>Select card type</option>
 						<option value="1">Visa</option>
 						<option value="2">Mastercard</option>
@@ -58,10 +64,10 @@
 
 				<div class="form-group creditcard">
 					<label>Card Number</label>
-					<input id="cardnumber1" name="cardNumber1" type="text" pattern="[0-9]{4}" size="4" >
-					<input id="cardnumber2" name="cardNumber2" type="text" pattern="[0-9]{4}" >
-					<input id="cardnumber3" name="cardNumber3" type="text" pattern="[0-9]{4}" >
-					<input id="cardnumber4" name="cardNumber4" type="text" pattern="[0-9]{4}" >
+					<input id="cardnumber1" name="cardNumber1" type="text" pattern="[0-9]{4}" size="4">
+					<input id="cardnumber2" name="cardNumber2" type="text" pattern="[0-9]{4}">
+					<input id="cardnumber3" name="cardNumber3" type="text" pattern="[0-9]{4}">
+					<input id="cardnumber4" name="cardNumber4" type="text" pattern="[0-9]{4}">
 					<label class="asterisk"> *</label>
 				</div>
 
@@ -89,6 +95,14 @@
 					<input id="address" type="text" required> <label class="asterisk"> *</label>
 
 				</div>
+
+
+				<div class="form-group" >
+					<div id="map" style="width:80% ;height: 600px;">
+					</div>
+				</div>
+
+
 				<div class="form-group">
 					<label>E-mail</label>
 					<input id="email" placeholder="user@example.sth" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
@@ -158,15 +172,72 @@
 </body>
 <script type="text/javascript">
 
-	function payment_change(){
-		if(	document.getElementById("payment_methods").selectedIndex==3){
+	var geocoder;
+	var map;
+
+	// Get the input box
+	var textInput = document.getElementById('address');
+	document.getElementById("map").style.visibility = "hidden";
+	// Init a timeout variable to be used below
+	var timeout = null;
+
+	// Listen for keystroke events
+	textInput.onkeyup = function (e)
+	{
+
+		// Clear the timeout if it has already been set.
+		// This will prevent the previous task from executing
+		// if it has been less than <MILLISECONDS>
+		clearTimeout(timeout);
+
+		// Make a new timeout set to go off in 800ms
+		timeout = setTimeout(function ()
+		{
+
+			document.getElementById("map").style.visibility = "visible";
+			codeAddress(textInput.value);
+			console.log(textInput.value);
+		}, 2000);
+	};
+
+	function codeAddress(address)
+	{
+		geocoder.geocode({'address': address}, function (results, status)
+		{
+			if (status == google.maps.GeocoderStatus.OK) {
+				map.setCenter(results[0].geometry.location);
+				var marker = new google.maps.Marker({
+					map: map,
+					position: results[0].geometry.location
+				});
+			} else {
+				alert("Geocode was not successful for the following reason: " + status);
+			}
+		});
+	}
+
+	function initMap()
+	{
+		geocoder = new google.maps.Geocoder();
+		var latlng = new google.maps.LatLng(39.074, 21.824);
+		var mapOptions = {
+			zoom: 8,
+			center: latlng
+		}
+		map = new google.maps.Map(document.getElementById("map"), mapOptions);
+	}
+
+
+	function payment_change()
+	{
+		if (document.getElementById("payment_methods").selectedIndex == 3) {
 			document.getElementById("payment_fieldset").style.visibility = "visible";
 			//An Invalid form control with name cardNumber error fix
 			document.getElementById("cardnumber1").required = true; //the empty string
 			document.getElementById("cardnumber2").required = true; //the empty string
 			document.getElementById("cardnumber3").required = true; //the empty string
 			document.getElementById("cardnumber4").required = true; //the empty string
-		}else{
+		} else {
 			document.getElementById("payment_fieldset").style.visibility = "hidden";
 			document.getElementById("cardnumber1").required = false; //the empty string
 			document.getElementById("cardnumber2").required = false; //the empty string
@@ -174,8 +245,68 @@
 			document.getElementById("cardnumber4").required = false; //the empty string
 		}
 	}
-	function reset(){
+	function reset()
+	{
 		document.getElementById("order").reset();
+	}
+	function validateForm()
+	{
+		var x = document.getElementById("username").value;
+		if (x == null || x == "") {
+			alert("Name must be filled out");
+			return false;
+		} else {
+			alert("Mr/Mrs " + x + ", your submission was successfull ")
+		}
+	}
+	function showHint(str)
+	{
+		if (str.length == 0) {
+			document.getElementById("txtHint").innerHTML = "";
+			return;
+		} else {
+			var xmlhttp = new XMLHttpRequest();
+			xmlhttp.onreadystatechange = function ()
+			{
+
+				if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+
+					if (window.DOMParser) {
+						parser = new DOMParser();
+						xmlDoc = parser.parseFromString(xmlhttp.responseText, "text/xml");
+					}
+					else // Internet Explorer
+					{
+						xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+						xmlDoc.async = false;
+						xmlDoc.loadXML(xmlhttp.responseText);
+					}
+					console.log(str)
+					//Gets house address number
+					var arrayNames = [];
+					var names = xmlDoc.getElementsByTagName("Name");
+					for (var i = 0; i < names.length; i++) {
+						arrayNames.push(names[i].innerHTML);
+					}
+					document.getElementById("txtHint").innerHTML = matchPeople(str, arrayNames);
+
+
+				}
+			};
+			xmlhttp.open("GET", "../names.xml?q=" + str, true);
+			xmlhttp.send();
+		}
+	}
+
+	function matchPeople(input, arrayNames)
+	{
+		var reg = new RegExp(input.split('').join('\\w*').replace(/\W/, ""), 'i');
+		return arrayNames.filter(function (name)
+		{
+			if (name.match(reg)) {
+				return name;
+			}
+		});
 	}
 
 </script>

@@ -1,3 +1,8 @@
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
 .body {
 	width: 500px;
 	max-height: 500px;
@@ -216,3 +221,6 @@ input[type=radio]:not(old):checked + label > span > span {
 }
 
 /*END RADIO BUTTONS*/
+#map {
+	height: 100%;
+}
