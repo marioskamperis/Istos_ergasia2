@@ -1,11 +1,11 @@
 body {
 	position: fixed;
-	top: 40%;
-	left: 50%;
-	width: 30em;
-
-	margin-top: -9em; /*set to a negative number 1/2 of your height*/
-	margin-left: -15em; /*set to a negative number 1/2 of your width*/
+	top: 10%;
+	left: 10%;
+	width: 80%;
+	height: 80%;
+	/*margin-top: -2em; !*set to a negative number 1/2 of your height*!*/
+	/*margin-left: -2em; !*set to a negative number 1/2 of your width*!*/
 	/*border: 1px solid #ccc;*/
 	background-color: #f3f3f3;
 	text-align: center;
@@ -13,42 +13,81 @@ body {
 	font-family: "Arial Rounded MT Bold";
 	font-size: x-large;
 	background-color: beige;
-	overflow: hidden;
+	/*overflow: hidden;*/
+	overflow:scroll;
 }
+
 div {
 	/*border: 1px solid black;*/
 	margin: 5px;
 }
+
 #parent {
 	position: fixed;
 	top: 0;
 	left: 0;
 	height: 100%;
 	/*width: 100%;*/
-	overflow: hidden;
+	/*overflow: hidden;*/
+	float:left;
 }
-.items{
-	max-height: 200px;
-	overflow: scroll;
-}
-.basket{
 
-	height:200px;
-	max-height: 200px;
-	background-color: #ffffff;
-}
-.object {
+.items {
+	/*max-height: 200px;*/
 	width:150px;
 	height:150px;
+	float:left;
+	/*overflow: scroll;*/
+}
+.bottom{
+	width: 100%;
+	float:left;
+}
+.basket {
+	height: 400px;
+	max-height: 800px;
+	width:70%;
+	background-color: #ffffff;
+	float:left;
+}
+.trash{
+	width:20%;
+	float:left;
+}
+
+#trash-image {
+	height: 200px;
+}
+
+.object {
+	width: 120px;
+	height: 120px;
 	border-radius: 0%;
 }
+
 .left {
 	float: left;
-	width:50%;
+	width: 50%;
 	display: block;
 }
-.hintlabel{
+
+.hintlabel {
 	font-family: "Arial Rounded MT Bold";
 	font-size: medium;
 	color: grey;
 }
+
+.innerbasket > .img-drop > .object{
+	width: 80px;
+	height: 80px;
+	float: left;
+}
+button[type=submit] {
+	 padding:5px 15px;
+	 background:lightgreen;
+	 font-size: 150%;
+	 border:0 none;
+	 cursor:pointer;
+	 -webkit-border-radius: 5px;
+	 border-radius: 5px;
+ }

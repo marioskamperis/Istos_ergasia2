@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!--suppress ALL -->
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -13,58 +14,202 @@
 	<label for="items">Καλάθι αγορών<br><label class="hintlabel">Σύρετε τα προίοντα που θέλετε να αγοράσετε στο καλάθι αγορών
 		σας.</label></label>
 	<!--<label >Σύρετε τα προίοντα που θέλετε να αγοράσετε στο καλάθι αγορών σας.</label>-->
-	<div class="items" name="items" id="items">
+	<div id="items" style="max-height: 200px; margin: 15px; padding-bottom: 45px">
 
-		<img class="object" id="object1" src="object1.jpg" draggable="true"
-			 ondragstart="drag(event)">
-		<img class="object" id="object2" src="object2.jpg" draggable="true"
-			 ondragstart="drag(event)">
-		<img class="object" id="object3" src="object3.jpg" draggable="true"
-			 ondragstart="drag(event)">
-		<img class="object" id="object4" src="object4.jpg" draggable="true"
-			 ondragstart="drag(event)">
+		<div id=items1 class="items">
+			<img class="object" id="avatar1" src="img/avatar1.png" draggable="true"
+				 ondragstart="drag(event,this.id)">
+		</div>
+		<div id=items2 class="items">
+			<img class="object" id="avatar2" src="img/avatar2.png" draggable="true"
+				 ondragstart="drag(event,this.id)"></div>
+		<div id=items3 class="items">
+			<img class="object" id="avatar3" src="img/avatar3.png" draggable="true"
+				 ondragstart="drag(event,this.id)">
+		</div>
+		<div id=items4 class="items">
+			<img class="object" id="avatar4" src="img/avatar4.png" draggable="true"
+				 ondragstart="drag(event,this.id)">
+		</div>
+
 	</div>
-	<label for="basket">Το καλάθι αγορών σας</label>
-	<label class="hint" for="items">Καλάθι αγορών</label>
-	<div class="basket" id="basket" ondrop="drop(event)" ondragover="allowDrop(event)">
+
+
+	<div class="bottom" id="bottom">
+		<label for="bottom">Το καλάθι αγορών σας</label>
+
+		<div class="basket" id="basket">
+			<div class="innerbasket" style="width: 100%; height:80px; float:left">
+				<div class="img-drop" id="img-drop1" style="width: 30%; height:80px; float:left; border-style: dotted;" ondrop="drop(event, this.id)" ondragover="allowDrop(event)">
+				</div>
+				<div class="object-info" id="info-drop1" style="width: 40%; height:80px;  float:left">
+					<span>Item quantity [0].</span>
+				</div>
+			</div>
+			<div class="innerbasket" style="width: 100%; height:80px; float:left">
+				<div class="img-drop" id="img-drop2" style="width: 30%; height:80px;  float:left;  border-style: dotted;"ondrop="drop(event, this.id)" ondragover="allowDrop(event)">
+				</div>
+				<div class="object-info" id="info-drop2" style="width: 40%; height:80px;  float:left">
+					<span>Item quantity [0].</span>
+				</div>
+			</div>
+			<div class="innerbasket" style="width: 100%; height:80px;  float:left">
+				<div class="img-drop" id="img-drop3" style="width: 30%; height:80px;  float:left; border-style: dotted;" ondrop="drop(event, this.id)" ondragover="allowDrop(event)">
+				</div>
+				<div class="object-info" id="info-drop3" style="width: 40%; height:80px;  float:left">
+					<span>Item quantity [0].</span>
+				</div>
+			</div>
+			<div class="innerbasket" style="width: 100%; height:80px;  float:left">
+				<div class="img-drop" id="img-drop4" style="width: 30%; height:80px;  float:left;  border-style: dotted;" ondrop="drop(event, this.id)" ondragover="allowDrop(event)">
+				</div>
+				<div class="object-info" id="info-drop4" style="width: 40%; height:80px; float:left">
+					<span>Item quantity [0].</span>
+				</div>
+			</div>
+
+		</div>
+		<div class="trash" id="trash" ondrop="dropTrash(event, this.id)" ondragover="allowDrop(event)">
+			<img class="trash-image" id="trash-image" src="img/trash.svg" draggable="false">
+		</div>
+		<button type=submit onclick="loadDoc('empty')" style="background:lightcoral; float:left">'Αδειασμα Καλαθιού.</button>
 	</div>
+
+
 </div>
 
 </body>
 <script>
-	function allowDrop(ev)
+	var quantity = [0, 0, 0, 0];
+	var running_id;
+	function allowDrop(ev, id)
 	{
 		ev.preventDefault();
-		console.log("drop allowed");
+		//		if (ev.target.id == 'img-drop1' || ev.target.id == 'img-drop2' || ev.target.id == 'img-drop3' || ev.target.id == 'img-drop4' || ev.target.id == 'img-drop5') {
+		//			document.getElementById(ev.target.id).style.backgroundColor = "red";
+		//			setTimeout(function ()
+		//			{
+		//				document.getElementById(ev.target.id).style.backgroundColor = "white";
+		//			}, 250);
+		//		}
+
 	}
 
-	function drag(ev)
+	function drag(ev, id)
 	{
+		running_id = id;
 		ev.dataTransfer.setData("text", ev.target.id);
-		console.log("drag");
+
 	}
 
 	function drop(ev)
 	{
 		ev.preventDefault();
+		var drop_new = true;
+
+
+		//Transefer image to basket div
 		var data = ev.dataTransfer.getData("text");
-		ev.target.appendChild(document.getElementById(data));
-		console.log("done");
-		loadDoc();
+		//		console.log(data);
+		console.log(data);
+
+		var product_id = data.substr(data.length - 1, data.length);
+
+		//Keep image to items div
+
+		if (ev.target.firstChild != document.getElementById(data)) {
+
+
+			var a = document.getElementsByClassName("img-drop");
+			for (var i = 0; i < a.length; a++) {
+				if (a[i].id == data) {
+					drop_new = false;
+				}
+			}
+			if (drop_new) {
+				ev.target.appendChild(document.getElementById(data));
+
+				var image = document.createElement("img");
+				image.className = "object";
+				image.id = data;
+				image.src = "img/" + data + ".png";
+				image.draggable = "true";
+				image.setAttribute("ondragstart", "drag(event,this.id)");
+
+				document.getElementById("items" + product_id + "").appendChild(image);
+			}
+
+		}
+
+		quantity[product_id-1]++;
+		loadDoc('change', product_id);
+
+		document.getElementById("info-drop" + product_id).innerText="Item quantity ["+quantity[product_id-1]+"].";
+		console.log("After on change" + quantity);
+
+
 	}
-	function loadDoc()
+
+	function dropTrash(ev)
 	{
+		ev.preventDefault();
+
+		//Transefer image to trash  div
+		var data = ev.dataTransfer.getData("text");
+		var product_id = data.substr(data.length - 1, data.length);
+
+		console.log(quantity);
+		//Keep image to items div
+		quantity[product_id-1]--;
+		console.log(quantity);
+		if(quantity[product_id-1]==0){
+			document.getElementById("img-drop"+product_id).removeChild(document.getElementById("img-drop"+product_id).firstChild);
+			document.getElementById("img-drop"+product_id).removeChild(document.getElementById("img-drop"+product_id).firstChild);
+		}
+		loadDoc('change', product_id);
+
+		document.getElementById("info-drop" + product_id).innerText="Item quantity ["+quantity[product_id-1]+"].";
+
+		console.log("After on change" + quantity);
+
+
+	}
+
+	function loadDoc(action, product_id)
+	{
+
 		var xhttp = new XMLHttpRequest();
 		xhttp.onreadystatechange = function ()
 		{
 			if (xhttp.readyState == 4 && xhttp.status == 200) {
-				console.log(xhttp.status);
-				alert(xhttp.status);
-//				document.getElementById("demo").innerHTML = xhttp.responseText;
+
+				var response = xhttp.responseText
+
+				if (response.startsWith("INFO")) {
+					console.log(response);
+				}
+
+				if (response.startsWith("ERROR")) {
+					alert("Υπήρξε κάποιο λάθος. Ξαναδοκιμάστε αργότερα.");
+					return false;
+				}
+
+				if (action == 'empty') {
+					alert(xhttp.responseText);
+					window.location.reload();
+				}
 			}
 		};
-		xhttp.open("POST", "http://83.212.86.187/post_data.php?action=change&productid=1&quantity=2", true);
-		xhttp.send();
+		var postvars = "action=" + action + "&productId=" + product_id + "&quantity=" + quantity[product_id-1];
+
+
+		xhttp.open("POST", "http://83.212.86.187/post_data.php", true);
+		xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		//		xhttp.setRequestHeader("Content-length", postvars.length);
+		//		xhttp.setRequestHeader("Connection", "close");
+		xhttp.send(postvars);
+
 	}
+
 </script>
 </html>

@@ -224,3 +224,9 @@ input[type=radio]:not(old):checked + label > span > span {
 #map {
 	height: 100%;
 }
+.hintlabel{
+	font-family: "Arial Rounded MT Bold";
+	font-size: medium;
+	color: grey;
+	float:none
+}
