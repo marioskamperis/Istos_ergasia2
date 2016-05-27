@@ -75,13 +75,18 @@
 			["AUD-EUR", "0,65"],
 			["AUD-USD", "0,73"],
 			["AUD-GBP", "0,51"],
-			["AUD-JPY", "79,69"]
+			["AUD-JPY", "79,69"],
+			//Japanese Jen converter
+			["JPY-EUR", "0.008"],
+			["JPY-USD", "0.009"],
+			["JPY-GBP", "0.006"],
+			["JPY-AUD", "0.012"]
 		];
 		var ammount = document.getElementById('ammount').value;
 		var currencySelector1 = document.getElementById('currencySelector1').value;
 		var currencySelector2 = document.getElementById('currencySelector2').value;
 		var message = "";
-		console.log(ammount);
+
 
 		if (currencySelector1 == currencySelector2) {
 			message = "1 " + currencySelector1 + " equals " + " 1" + currencySelector2;
